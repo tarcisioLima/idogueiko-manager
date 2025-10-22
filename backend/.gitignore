@@ -1,0 +1,13 @@
+# dotenv
+.env
+.env.local
+
+# virtualenv
+.venv/
+venv/
+.env/
+venv*/
+
+#sqlite
+*.sqlite*
+db.sqlite3
