@@ -1,35 +1,58 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { useEffect } from "react";
+import { Layout, Menu } from "antd";
+import { Outlet, useNavigate } from "react-router-dom";
+import { CategoryProvider } from "~/context/CategoryContext";
+
+const { Header, Content, Sider } = Layout;
 
 function App() {
-  const [count, setCount] = useState(0);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/golpes");
+  }, []);
 
   return (
-    <>
-      {<>Hello World</>}
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <CategoryProvider>
+      <Layout style={{ minHeight: "100vh" }}>
+        <Sider theme="dark">
+          <div
+            style={{
+              color: "white",
+              textAlign: "center",
+              padding: "16px 0",
+              fontWeight: "bold",
+              fontSize: 18,
+            }}
+          >
+            🥋 Idogueiko
+          </div>
+          <Menu
+            theme="dark"
+            mode="inline"
+            items={[
+              {
+                key: "golpes",
+                label: "Golpes",
+                onClick: () => navigate("/golpes"),
+              },
+            ]}
+          />
+        </Sider>
+
+        <Layout>
+          <Header style={{ background: "#fff", textAlign: "center" }}>
+            <h2>Karate Kyokushin CRUD System</h2>
+          </Header>
+
+          <Content
+            style={{ margin: "24px", padding: "24px", background: "#fff" }}
+          >
+            <Outlet />
+          </Content>
+        </Layout>
+      </Layout>
+    </CategoryProvider>
   );
 }
 

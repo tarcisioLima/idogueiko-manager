@@ -17,7 +17,7 @@ class Technique(models.Model):
     category = models.ForeignKey(
         Category,
         related_name='techniques',
-        on_delete=models.PROTECT
+        on_delete=models.CASCADE
     )
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
@@ -55,7 +55,7 @@ class SequenceTechnique(models.Model):
 
     side = models.CharField(max_length=30, choices=TYPE_SIDE, default='OI')
     sequence = models.ForeignKey(Sequence, on_delete=models.CASCADE)
-    technique = models.ForeignKey(Technique, on_delete=models.PROTECT)
+    technique = models.ForeignKey(Technique, on_delete=models.CASCADE)
     order = models.PositiveIntegerField(default=1) 
 
     class Meta:
