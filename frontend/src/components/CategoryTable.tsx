@@ -1,16 +1,16 @@
-import { Table, Button, Popconfirm, Tag } from "antd";
+import { Table, Button, Popconfirm } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
-import { Technique } from "~/types";
+import { Category } from "~/types";
 
 type Props = {
-  data: Technique[];
-  onEdit: (record: Technique) => void;
+  data: Category[];
+  onEdit: (record: Category) => void;
   onDelete: (id: number) => void;
   loading: boolean;
 };
 
-export const TechniqueTable: React.FC<Props> = ({
+export const CategoryTable: React.FC<Props> = ({
   data,
   onEdit,
   onDelete,
@@ -18,12 +18,6 @@ export const TechniqueTable: React.FC<Props> = ({
 }) => {
   const columns = [
     { title: "Nome", dataIndex: "name", key: "name" },
-    {
-      title: "Categoria",
-      dataIndex: "category_name",
-      key: "category_name",
-      render: (text) => <Tag>{text}</Tag>,
-    },
     {
       title: "Descrição",
       dataIndex: "description",
@@ -33,7 +27,7 @@ export const TechniqueTable: React.FC<Props> = ({
     {
       title: "Ações",
       key: "actions",
-      render: (record: Technique) => (
+      render: (record: Category) => (
         <>
           <Button
             icon={<EditOutlined />}
@@ -52,7 +46,7 @@ export const TechniqueTable: React.FC<Props> = ({
   ];
 
   return (
-    <Table<Technique>
+    <Table<Category>
       rowKey="id"
       columns={columns}
       dataSource={data}

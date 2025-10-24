@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { Button, message } from "antd";
+import { Button, message, Typography, Flex } from "antd";
 import api from "~/api/api";
-import type { Technique } from "~/types";
+import { Technique } from "~/types";
 import { TechniqueForm } from "~/components/TechniqueForm";
 import { TechniqueTable } from "~/components/TechniqueTable";
+
+const { Title } = Typography;
 
 export default function TechniquePage() {
   const [data, setData] = useState<Technique[]>([]);
@@ -43,14 +45,12 @@ export default function TechniquePage() {
 
   return (
     <div style={{ padding: 24 }}>
-      <h1>Golpes</h1>
-      <Button
-        type="primary"
-        style={{ marginBottom: 16 }}
-        onClick={() => setModalOpen(true)}
-      >
-        Novo Golpe
-      </Button>
+      <Flex align="center" justify="space-between">
+        <Title>Golpes</Title>
+        <Button type="primary" onClick={() => setModalOpen(true)} size="large">
+          Novo golpe
+        </Button>
+      </Flex>
 
       <TechniqueTable
         data={data}

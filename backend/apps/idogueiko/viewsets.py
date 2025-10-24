@@ -17,12 +17,12 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 
 class TechniqueViewSet(viewsets.ModelViewSet):
-    queryset = Technique.objects.all()
+    queryset = Technique.objects.all().order_by('-id')
     serializer_class = TechniqueSerializer
 
 
 class SequenceViewSet(viewsets.ModelViewSet):
-    queryset = Sequence.objects.all()
+    queryset = Sequence.objects.all().order_by('-id')
     serializer_class = SequenceSerializer
 
     @action(detail=False, methods=['post'], url_path='generate-random')

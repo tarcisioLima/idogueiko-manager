@@ -1,34 +1,27 @@
 import { useEffect } from "react";
-import { Modal, Form, Input, Select } from "antd";
-import { Technique } from "~/types";
-import { useCategories } from "~/context/CategoryContext";
+import { Modal, Form, Input } from "antd";
+import { Category } from "~/types";
 
 interface Props {
   open: boolean;
   onCancel: () => void;
-  onSubmit: (values: Omit<Technique, "id">) => void;
-  initialValues?: Partial<Technique>;
+  onSubmit: (values: Omit<Category, "id">) => void;
+  initialValues?: Partial<Category>;
 }
 
-export const TechniqueForm: React.FC<Props> = ({
+export const CategoryForm: React.FC<Props> = ({
   open,
   onCancel,
   onSubmit,
   initialValues,
 }) => {
   const [form] = Form.useForm();
-  const { categories } = useCategories();
 
   useEffect(() => {
     if (open) {
       if (initialValues && Object.keys(initialValues).length > 0) {
         form.setFieldsValue({
           ...initialValues,
-          category:
-            typeof initialValues.category === "object" &&
-            initialValues.category !== null
-              ? (initialValues.category as { id: number }).id
-              : initialValues.category,
         });
       } else {
         form.resetFields();
@@ -43,7 +36,7 @@ export const TechniqueForm: React.FC<Props> = ({
 
   return (
     <Modal
-      title={initialValues?.id ? "Editar Golpe" : "Novo Golpe"}
+      title={initialValues?.id ? "Editar Categoria" : "Nova Categoria"}
       open={open}
       onOk={() => form.submit()}
       onCancel={handleCancel}
@@ -53,20 +46,6 @@ export const TechniqueForm: React.FC<Props> = ({
       <Form form={form} layout="vertical" onFinish={onSubmit}>
         <Form.Item name="name" label="Nome" rules={[{ required: true }]}>
           <Input />
-        </Form.Item>
-
-        <Form.Item
-          name="category"
-          label="Categoria"
-          rules={[{ required: true }]}
-        >
-          <Select
-            placeholder="Selecione uma categoria"
-            options={categories.map((cat) => ({
-              label: cat.name,
-              value: cat.id,
-            }))}
-          />
         </Form.Item>
 
         <Form.Item name="description" label="Descrição">

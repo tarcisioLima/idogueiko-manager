@@ -8,10 +8,6 @@ const { Header, Content, Sider } = Layout;
 function App() {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    navigate("/golpes");
-  }, []);
-
   return (
     <CategoryProvider>
       <Layout style={{ minHeight: "100vh" }}>
@@ -32,9 +28,19 @@ function App() {
             mode="inline"
             items={[
               {
+                key: "categorias",
+                label: "Categorias",
+                onClick: () => navigate("/categorias"),
+              },
+              {
                 key: "golpes",
                 label: "Golpes",
                 onClick: () => navigate("/golpes"),
+              },
+              {
+                key: "sequencias",
+                label: "Sequencias",
+                onClick: () => navigate("/sequencias"),
               },
             ]}
           />

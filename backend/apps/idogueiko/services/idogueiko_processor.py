@@ -12,6 +12,7 @@ class IdogueikoProcessor:
 
         all_techniques = list(Technique.objects.all())
         if len(all_techniques) < quantity:
+            self.sequence.delete()
             raise ValueError("Não há golpes suficientes cadastrados.")
 
         chosen = random.sample(all_techniques, quantity)
